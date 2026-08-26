@@ -1,0 +1,100 @@
+{
+  "name": "paintscript",
+  "displayName": "PaintScript",
+  "description": "Language support for PaintScript",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.134.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onLanguage:paint",
+    "onLanguage:pxml",
+    "onLanguage:pss",
+    "onLanguage:paintscript",
+    "onCommand:paintscript.activate_language_server"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "paintscript.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "paintscript.activate_language_server",
+        "title": "Activate PaintScript Language Server"
+      }
+    ],
+    "languages": [
+      {
+        "id": "paint",
+        "aliases": [
+          "Paint Setup File",
+          "Paint Builder Project File",
+          "Paint Project Descriptor File",
+          "Paint"
+        ],
+        "extensions": [".Paint", ".paint", ".pmf", ".pfxml", ".ppdf"],
+        "configuration": "./language-configuration/paint.json"
+      },
+      {
+        "id": "pxml",
+        "aliases": [
+          "Paint XML",
+          "Paint Markup Language",
+          "Paint Element Structure",
+          "Paint eXtendable Markup Language"
+        ],
+        "extensions": [".pxml", ".pml"],
+        "configuration": "./language-configuration/pxml.json"
+      },
+      {
+        "id": "pss",
+        "aliases": ["Paint CSS", "Paint Style Sheet", "Paint Style File"],
+        "extensions": [".pss", ".psf"],
+        "configuration": "./language-configuration/pss.json"
+      },
+      {
+        "id": "paintscript",
+        "aliases": ["PaintScript"],
+        "extensions": [".pxs", ".PaintScript", ".paintscript"],
+        "configuration": "./language-configuration/pxs.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "paintscript",
+        "scopeName": "source.paintscript",
+        "path": "./syntaxes/paintscript.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./ && tsc -p ./server",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.13.3",
+    "@types/vscode": "^1.134.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0",
+    "eslint": "^10.5.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^10.1.0",
+    "vscode-languageserver": "^10.1.0",
+    "vscode-languageserver-textdocument": "^1.0.12"
+  }
+}
